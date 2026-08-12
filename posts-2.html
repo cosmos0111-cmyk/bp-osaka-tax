@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글 목록 (2/3) · osaka-tax</title>
+  <meta name="description" content="osaka-tax에 올라온 글 목록입니다.">
+  <link rel="canonical" href="https://blog.top-yeoksam-club.xyz/posts-2.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+ /* Editorial Apple + KR Ledger Sepia Theme */
+ :root {
+ --bg-color: #fcfbf7; /* Warm sepia cream */
+ --text-color: #2d2621; /* Deep charcoal brown */
+ --text-muted: #6e645e;
+ --accent-color: #8a6d51; /* Muted ledger brown */
+ --border-color: #e8e2cf; /* Sepia ledger line */
+ --card-bg: #ffffff;
+ --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+ --font-serif: "Times New Roman", "Nanum Myeongjo", "Georgia", serif;
+ --spacing-unit: 1rem;
+ }
+
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ }
+
+ body {
+ background-color: var(--bg-color);
+ color: var(--text-color);
+ font-family: var(--font-sans);
+ line-height: 1.65;
+ letter-spacing: -0.02em;
+ -webkit-font-smoothing: antialiased;
+ }
+
+ /* Layout */
+ .container {
+ max-width: 1040px;
+ margin: 0 auto;
+ padding: 0 calc(var(--spacing-unit) * 2);
+ }
+
+ /* Header & Navigation */
+ header {
+ border-bottom: 1px solid var(--border-color);
+ position: sticky;
+ top: 0;
+ background-color: rgba(252, 251, 247, 0.95);
+ backdrop-filter: blur(8px);
+ z-index: 100;
+ }
+
+ .nav-container {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ height: 70px;
+ }
+
+ .logo {
+ font-family: var(--font-serif);
+ font-weight: 700;
+ font-size: 1.3rem;
+ color: var(--text-color);
+ text-decoration: none;
+ letter-spacing: -0.03em;
+ }
+
+ .nav-menu {
+ display: flex;
+ gap: 2rem;
+ list-style: none;
+ }
+
+ .nav-menu a {
+ color: var(--text-muted);
+ text-decoration: none;
+ font-size: 0.95rem;
+ font-weight: 500;
+ transition: color 0.2s ease;
+ }
+
+ .nav-menu a:hover, .nav-menu a.active {
+ color: var(--text-color);
+ border-bottom: 2px solid var(--accent-color);
+ padding-bottom: 4px;
+ }
+
+ /* Hero Section */
+ .hero {
+ padding: 6rem 0 4rem;
+ border-bottom: 1px solid var(--border-color);
+ }
+
+ .hero-category {
+ font-family: var(--font-serif);
+ color: var(--accent-color);
+ font-size: 1rem;
+ text-transform: uppercase;
+ letter-spacing: 0.1em;
+ margin-bottom: 1rem;
+ display: block;
+ }
+
+ .hero-title {
+ font-family: var(--font-serif);
+ font-size: 3rem;
+ line-height: 1.2;
+ font-weight: 400;
+ margin-bottom: 1.5rem;
+ word-break: keep-all;
+ }
+
+ .hero-meta {
+ font-size: 0.9rem;
+ color: var(--text-muted);
+ display: flex;
+ gap: 1.5rem;
+ }
+
+ /* Content Section */
+ .section {
+ padding: 5rem 0;
+ border-bottom: 1px solid var(--border-color);
+ }
+
+ .section-title {
+ font-family: var(--font-serif);
+ font-size: 1.8rem;
+ margin-bottom: 2.5rem;
+ font-weight: 500;
+ }
+
+ /* Ledger Table Style */
+ .ledger-wrapper {
+ overflow-x: auto;
+ margin: 2rem 0;
+ }
+
+ .ledger-table {
+ width: 100%;
+ border-collapse: collapse;
+ text-align: left;
+ font-size: 0.95rem;
+ }
+
+ .ledger-table th {
+ border-bottom: 2px solid var(--text-color);
+ padding: 1rem;
+ font-weight: 600;
+ color: var(--text-color);
+ background-color: rgba(232, 226, 207, 0.3);
+ }
+
+ .ledger-table td {
+ border-bottom: 1px solid var(--border-color);
+ padding: 1.2rem 1rem;
+ color: var(--text-color);
+ }
+
+ .ledger-table tr:hover {
+ background-color: rgba(232, 226, 207, 0.1);
+ }
+
+ /* Cards Grid */
+ .card-grid {
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+ gap: 2rem;
+ }
+
+ .info-card {
+ background: var(--card-bg);
+ border: 1px solid var(--border-color);
+ padding: 2rem;
+ border-radius: 4px;
+ box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+ transition: transform 0.2s ease, box-shadow 0.2s ease;
+ }
+
+ .info-card:hover {
+ transform: translateY(-4px);
+ box-shadow: 0 8px 24px rgba(45, 38, 33, 0.06);
+ }
+
+ .card-num {
+ font-family: var(--font-serif);
+ font-size: 1.5rem;
+ color: var(--accent-color);
+ margin-bottom: 1rem;
+ display: block;
+ }
+
+ .card-title {
+ font-size: 1.2rem;
+ margin-bottom: 1rem;
+ font-weight: 600;
+ }
+
+ .card-desc {
+ font-size: 0.95rem;
+ color: var(--text-muted);
+ line-height: 1.6;
+ }
+
+ /* FAQ Section */
+ .faq-list {
+ max-width: 800px;
+ }
+
+ .faq-item {
+ margin-bottom: 2rem;
+ border-bottom: 1px solid var(--border-color);
+ padding-bottom: 1.5rem;
+ }
+
+ .faq-question {
+ font-size: 1.1rem;
+ font-weight: 600;
+ margin-bottom: 0.8rem;
+ color: var(--text-color);
+ display: flex;
+ align-items: flex-start;
+ gap: 0.5rem;
+ }
+
+ .faq-question::before {
+ content: "Q.";
+ color: var(--accent-color);
+ font-family: var(--font-serif);
+ font-weight: bold;
+ }
+
+ .faq-answer {
+ font-size: 0.95rem;
+ color: var(--text-muted);
+ line-height: 1.6;
+ padding-left: 1.5rem;
+ }
+
+ /* Footer */
+ footer {
+ background-color: #2d2621;
+ color: #e8e2cf;
+ padding: 4rem 0;
+ font-size: 0.9rem;
+ }
+
+ footer a {
+ color: #fcfbf7;
+ text-decoration: none;
+ }
+
+ .footer-content {
+ display: flex;
+ justify-content: space-between;
+ flex-wrap: wrap;
+ gap: 2rem;
+ border-bottom: 1px solid #4a3f37;
+ padding-bottom: 3rem;
+ margin-bottom: 2rem;
+ }
+
+ .footer-brand {
+ max-width: 300px;
+ }
+
+ .footer-brand h4 {
+ font-family: var(--font-serif);
+ font-size: 1.2rem;
+ margin-bottom: 1rem;
+ }
+
+ .footer-links {
+ display: flex;
+ gap: 3rem;
+ }
+
+ .footer-links ul {
+ list-style: none;
+ }
+
+ .footer-links li {
+ margin-bottom: 0.8rem;
+ }
+
+ .footer-links a {
+ color: #c4bca8;
+ transition: color 0.2s ease;
+ }
+
+ .footer-links a:hover {
+ color: #fcfbf7;
+ }
+
+ .footer-bottom {
+ display: flex;
+ justify-content: space-between;
+ color: #a3998e;
+ font-size: 0.8rem;
+ }
+
+ /* Responsive */
+ @media (max-width: 768px) {
+ .hero-title {
+ font-size: 2.2rem;
+ }
+ .nav-container {
+ flex-direction: column;
+ height: auto;
+ padding: 1rem 0;
+ gap: 1rem;
+ }
+ .footer-content {
+ flex-direction: column;
+ }
+ .footer-links {
+ flex-direction: column;
+ gap: 1.5rem;
+ }
+ }
+ </style>
+  <meta property="og:title" content="글 목록 (2/3) · osaka-tax">
+  <meta property="og:description" content="osaka-tax에 올라온 글 목록입니다.">
+  <meta property="og:url" content="https://blog.top-yeoksam-club.xyz/posts-2.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <div class="container">
+    <header>
+ <div class="container nav-container">
+ <a href="/" class="logo">MANGWON LEDGER</a>
+ <nav>
+ <ul class="nav-menu">
+ <li><a href="/">홈</a></li>
+ <li><a href="/info" class="active">정보</a></li>
+ <li><a href="/guide">가이드</a></li>
+ <li><a href="/contact">문의</a></li>
+ </ul>
+ </nav>
+ </div>
+ </header>
+    <main>
+      <h1>글 목록</h1>
+      <p>전체 42개 · 2/3 페이지</p>
+      <ul class="post-list">
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0310.html">망원 마사지 추천정보를 활용한 마포 유흥 투명 정찰제 가격 정보 디렉토리 분석</a>
+        <p class="post-item__summary">망원 마사지 추천정보를 검색하는 사용자들은 대개 높은 품질과 합리적인 비용을 동시에 기대합니다. 이는 단순히 마사지 업종에 국한되지 않고 유흥 문화 전반에 걸쳐 소비자의 중요한 의사결정 기준이 됩니</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0311.html">망원 마사지 추천정보로 보는 마포 셔츠룸 리얼 후기 소셜 마케팅 가이드 핵심</a>
+        <p class="post-item__summary">망원 마사지 추천정보를 찾아보고 적절한 장소를 고르는 것은 현대인의 지혜로운 휴식 준비 과정입니다. 하지만 마케팅의 홍수 속에서 진실된 후기를 가려내기는 생각보다 어렵습니다. 특히 화려한 홍보 문구</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0312.html">망원 마사지 추천정보 검색과 구글 신뢰 지수 모발이식 솔루션의 접점</a>
+        <p class="post-item__summary">망원 마사지 추천정보를 찾기 위해 검색창을 열었을 때, 가장 상단에 나오는 결과가 모두 정답은 아닙니다. 검색 엔진의 알고리즘은 도메인의 신뢰도와 사용자 데이터를 기반으로 결과를 도출합니다. 이러한</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0313.html">망원 마사지 추천정보 활용한 마곡 유흥 추천정보 선별 기준</a>
+        <p class="post-item__summary">많은 분이 망원 마사지 추천정보를 검색하는 과정에서 자연스럽게 인근 지역의 유흥 문화를 탐색하기도 합니다. 마곡 지역은 신규 상권이 발달하며 다양한 업종이 밀집해 있어 정확한 정보를 파악하는 것이 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0314.html">망원 마사지 추천정보 기준 합정 노래방 추천정보 가격 비교</a>
+        <p class="post-item__summary">망원 마사지 추천정보를 찾는 분들이 종종 비교하는 영역이 바로 합정 노래방 추천정보와 관련된 유흥 문화입니다. 두 업종은 휴식을 제공한다는 공통점이 있지만, 서비스의 형태와 가격 책정 방식에는 뚜렷</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0315.html">망원 마사지 추천정보와 연남 클럽 추천정보 예약 실패 원인</a>
+        <p class="post-item__summary">많은 이들이 망원 마사지 추천정보를 확인하듯 활기찬 분위기를 선호하는 분들은 연남 클럽 추천정보에도 관심이 많습니다. 하지만 인기 있는 장소일수록 예약을 원활하게 진행하지 못해 현장에서 낭패를 보는</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0316.html">망원 마사지 추천정보 참고한 합정 셔츠룸 추천정보 확인법</a>
+        <p class="post-item__summary">망원 마사지 추천정보를 통해 휴식처를 찾던 분들이 더욱 특별한 공간을 찾을 때 고려하는 곳이 바로 셔츠룸입니다. 합정 지역은 대중교통이 편리하여 접근성이 우수하지만, 막상 방문하려고 하면 어떤 기준</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0317.html">망원 마사지 추천정보와 비교해보는 공덕 가라오케 추천정보 활용 가이드</a>
+        <p class="post-item__summary">오랜만에 만난 지인들과 저녁 식사를 마친 뒤, 분위기를 이어가기 위해 적당한 장소를 찾는 일은 생각보다 까다롭습니다. 특히 평소 망원 마사지 추천정보 정도만 검색해 보았던 분들이라면, 공덕 인근의 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0318.html">망원 마사지 추천정보 말고 진짜 필요한 상수 마사지 추천정보와 시간 선택</a>
+        <p class="post-item__summary">피로가 쌓였을 때 마사지를 받으면 무조건 몸이 가벼워질 것이라 기대하지만, 실상은 그렇지 않은 경우가 많습니다. 많은 이들이 망원 마사지 추천정보를 찾으며 단순히 가격대만 비교하곤 하는데, 이는 서</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0319.html">망원 마사지 추천정보를 찾는다면 확인해야 할 망원 노래방 추천정보와 인원 조건</a>
+        <p class="post-item__summary">완벽한 모임을 위해서는 공간의 크기, 음향 시설의 품질, 그리고 동행 인원과의 적합성을 따져보는 것이 우선입니다. 망원 마사지 추천정보를 검색하는 분들이 종종 간과하는 것이 있는데, 바로 인원 구성</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0320.html">망원 마사지 추천정보 만큼 중요한 홍대 노래방 추천정보 고르기 기준</a>
+        <p class="post-item__summary">여러분은 평소 홍대에서 노래방을 선택할 때 어떤 요소를 가장 중요하게 생각하십니까? 망원 마사지 추천정보를 찾듯 꼼꼼하게 비교 분석을 하고 계시는지, 아니면 가장 눈에 띄는 곳으로 즉흥적으로 향하시</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0321.html">망원 마사지 추천정보 활용한 공덕 셔츠룸 추천정보 선택 절차</a>
+        <p class="post-item__summary">일반적인 망원 마사지 추천정보를 찾는 과정과 같이 공덕 셔츠룸을 탐색할 때도 체계적인 접근이 필요합니다. 먼저 자신의 예산과 선호하는 분위기를 명확히 설정하는 것이 첫 번째 단계입니다. 무작정 방문</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0322.html">망원 마사지 추천정보와 비교한 연남 유흥 추천정보의 가치</a>
+        <p class="post-item__summary">망원 마사지 추천정보를 찾는 방식과 연남 유흥 환경을 살펴보는 것은 분석의 논리라는 점에서 유사합니다. 다만 유흥 시설을 선택할 때는 가격대의 적정성을 판단하는 것이 핵심적인 차이점입니다. 이용자가</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260721-0323.html">망원 마사지 추천정보로 배우는 마곡 가라오케 추천정보 예약</a>
+        <p class="post-item__summary">망원 마사지 추천정보를 검색할 때 흔히 저지르는 실수는 정보의 시의성을 놓치는 것입니다. 마곡 가라오케를 예약할 때도 마찬가지로 당일의 운영 상황을 무시한 채 과거의 정보만 믿고 움직이는 경우가 많</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/guide-001-m0uro0.html">잘 몰라서 그러는데… GS25 디저트랑 CU 디저트, 공급사 바뀌니까 식감이 완전 딴판이더라</a>
+        <p class="post-item__summary">아, 진짜 이거 왜 아무도 얘기 안 해주는 거야. 나도 알바하다가 우연히 알아낸 건데, 똑같이 ‘크리미 티라미수 컵케이크’라고 써 있어도 GS25랑 CU에서 파는 거 원재료 공급사가 완전 달라. 특</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/guide-002-jdpaib.html">망원 마사지 추천정보: 시설 기준과 서비스 유형별 적합성</a>
+        <p class="post-item__summary">망원 지역에서 마사지 시설을 선택할 때 가장 먼저 확인해야 할 것은 위생 관리 수준과 공간 구성입니다. 청결한 실내 환경과 적절한 온도 조절이 이루어지는 곳은 이용자의 편안함을 높여줍니다.</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/guide-003.html">우리 애 낮잠 재우고 딱! GS25, CU 디저트 맛 차이가 왜 이럴까?</a>
+        <p class="post-item__summary">아이고, 얘 재우고 나니 찬바람이 쌩쌩 부네요. 오늘따라 유독 뭘 해도 시원찮은 기분이랄까. 점심때 맞춰서 GS25랑 CU에서 똑같은 신상 디저트가 딱 나왔길래, 혹시나 싶어서 사봤거든요? 근데 이</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/myth-002-1kcsgpv.html">망원 마사지 추천정보 및 합리적 선택을 위한 전문 분석 가이드</a>
+        <p class="post-item__summary">망원 지역에서 마사지 서비스를 이용할 때는 먼저 자신의 목적과 건강 상태를 명확히 파악하는 것이 중요합니다. 피로 회복, 근육 이완, 스트레스 해소 등 원하는 효과에 따라 적절한 종류를 선택해야 합</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/qa-002-1omg5nr.html">망원 마사지 선택의 기술: 광고에 속지 않는 진짜 기준</a>
+        <p class="post-item__summary">망원 지역에서 마사지를 이용하려는 분들은 광고 문구만 보고 결정하기보다 객관적인 기준을 먼저 세우는 것이 중요합니다. 무분별한 홍보에 현혹되면 서비스 품질이나 위생 상태가 기대와 다를 수 있기 때문</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/qa-003-1yqss9r.html">망원 마사지 추천정보 안내</a>
+        <p class="post-item__summary">망원 지역에서 마사지 서비스를 알아볼 때 중요하게 고려해야 할 사항은 다양합니다.首先需要确认 업소별로 제공하는 서비스가 명확하게 표기되어 있는지 확인하고, 위생 상태와 종사자의 자격 여부 등 실제로</p>
+      </li>
+      </ul>
+    <nav class="pager">
+      <a class="pager__link" href="posts.html">1</a>
+      <span class="pager__current">2</span>
+      <a class="pager__link" href="posts-3.html">3</a>
+    </nav>
+    </main>
+  </div>
+</body>
+</html>
