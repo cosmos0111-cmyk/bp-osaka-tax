@@ -104,6 +104,14 @@ div[data-post-index-navigation="true"] a { display:inline-flex !important; visib
 nav.pager, nav.post-pager, nav[data-site-documents="true"] { display:flex !important; visibility:visible !important; flex-wrap:wrap; gap:12px; padding:16px 0; }
 nav.pager a, nav.post-pager a, nav[data-site-documents="true"] a { display:inline-flex !important; visibility:visible !important; align-items:center; padding:6px 10px; color:inherit; }
 :where(main, article, .content) :where(img), :where(body) > :where(img) { max-width:100%; height:auto; }
+/* legacy-mobile-padded-reviews */
+@media (max-width:768px) {
+  .container { box-sizing:border-box; min-width:0; max-width:100%; padding-inline:clamp(16px,4vw,24px); }
+  .hero { box-sizing:border-box; min-width:0; padding:clamp(24px,6vw,48px) clamp(16px,4vw,24px); }
+  .grid { grid-template-columns:minmax(0,1fr); min-width:0; }
+  .grid > *, .review { min-width:0; box-sizing:border-box; }
+  .review > * { min-width:0; max-width:100%; }
+}
 </style>  <meta property="og:type" content="website">
   <meta property="og:image" content="https://blog.top-yeoksam-club.xyz/assets/interior__hero__osaka-tax__1344x768__fccc2f9c337aea0b.png">
 </head>
